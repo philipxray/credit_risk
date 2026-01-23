@@ -1,32 +1,35 @@
 CREATE TABLE credit_raw (
-	id INTEGER,
-	limit_bal INTEGER,
-	sex INTEGER,
-	education INTEGER,
-	marriage INTEGER,
-	age INTEGER,
-	
-	pay_0 INTEGER,
-	pay_1 INTEGER,
-	pay_2 INTEGER,
-	pay_3 INTEGER,
-	pay_4 INTEGER,
-	pay_5 INTEGER,
-	pay_6 INTEGER,
-	
-	bill_amt1 INTEGER,
-	bill_amt2 INTEGER,
-	bill_amt3 INTEGER,
-	bill_amt4 INTEGER,
-	bill_amt5 INTEGER,
-	bill_amt6 INTEGER,
-	
-	pay_amt1 INTEGER,
-	pay_amt2 INTEGER,
-	pay_amt3 INTEGER,
-	pay_amt4 INTEGER,
-	pay_amt5 INTEGER,
-	pay_amt6 INTEGER,
-	
-	default_next_month INTEGER
-	);
+    id TEXT,
+    limit_bal TEXT,
+    sex TEXT,
+    education TEXT,
+    marriage TEXT,
+    age TEXT,
+
+    pay_0 TEXT,
+    pay_2 TEXT,
+    pay_3 TEXT,
+    pay_4 TEXT,
+    pay_5 TEXT,
+    pay_6 TEXT,
+
+    bill_amt1 TEXT,
+    bill_amt2 TEXT,
+    bill_amt3 TEXT,
+    bill_amt4 TEXT,
+    bill_amt5 TEXT,
+    bill_amt6 TEXT,
+
+    pay_amt1 TEXT,
+    pay_amt2 TEXT,
+    pay_amt3 TEXT,
+    pay_amt4 TEXT,
+    pay_amt5 TEXT,
+    pay_amt6 TEXT,
+
+    default_payment_next_month TEXT
+);
+
+SELECT column_name
+FROM information_schema.columns
+WHERE table_name = 'credit_raw';
