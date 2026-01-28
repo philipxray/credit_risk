@@ -1,6 +1,10 @@
 #Default Credit Risk analysis
 ## Project Background
+
+
+
 ## Executive Summary
+This project analyzes credit card payment behavior using an anonymized dataset from the UCI Machine Learning Repository. The objective is to understand patterns in billing, payment activity, and delinquency in order to identify key indicators associated with default risk. I built a data pipeline using PostgreSQL, engineered features, and performed risk summarization that could inform credit risk decision-making.
 1. What you analyzed
 
 2. What tools you used
@@ -10,7 +14,21 @@
 2–3 key findings (even if early)
 
 ## Business Questions + Objectives
-Examples (keep it simple):
+
+### Objectives
+1. Clean and normalize imported data
+
+2.Convert Taiwan Dollar (TWD) values to USD
+
+3.Engineer behavioral and utilization features
+
+4.Explore associations with default risk
+
+5.Deliver business-ready metrics and interpretations
+
+
+### Questions
+###### Examples (keep it simple):
 
 What behaviors are most associated with default?
 
@@ -18,7 +36,28 @@ How does delinquency relate to default?
 
 Does utilization signal risk?
 ## Dataset Overview
+The dataset comes from Kaggle: “Default of Credit Card Clients”. It contains 30,000 anonymized credit card customer records with six months of billing and payment history, demographic attributes, and a default indicator. Features include monthly statement balances (`bill_amt1` - `bill_amt_6`), payment amounts (`pay_amt1`-`pay_amt6`), and repayment status (`pay_0`–`pay_6`), along with customer attributes like age, credit limit, education, and marriage status.
+
+(https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients)
+
+I. Yeh. "Default of Credit Card Clients,"
+UCI Machine Learning Repository, 2009. 
+[Online]. Available: (https://doi.org/10.24432/C55S3H.)
 ### Data Pipeline
+#### Landing Raw Data
+Imported raw CSV into a PostgreSQL landing table to preserve original values.
+#### Data Quality Issues
+
+* BOM character in header resolved
+
+* Filtered header row from data
+
+* Ensured numeric conversion and type safety
+
+ #### Staging & Core Table
+ ##### Built a staging table with proper numeric types (`INTEGER`, `NUMERIC`) and base cleaned values.
+ ![alt text](https://attachment:37d3ecf4-1d9b-4335-85a4-73323a5cc151.png "Logo Title Text 1")
+ ![image.png](attachment:37d3ecf4-1d9b-4335-85a4-73323a5cc151.png)
 ## Methodology
 ## Feature Engineering
 | Feature                   | Description                              |
