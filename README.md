@@ -1,40 +1,34 @@
-#Default Credit Risk analysis
+# Default Credit Risk analysis
 ## Project Background
 
 
 
 ## Executive Summary
 This project analyzes credit card payment behavior using an anonymized dataset from the UCI Machine Learning Repository. The objective is to understand patterns in billing, payment activity, and delinquency in order to identify key indicators associated with default risk. I built a data pipeline using PostgreSQL, engineered features, and performed risk summarization that could inform credit risk decision-making.
-1. What you analyzed
-
-2. What tools you used
-
-3. What you built (tables + features)
-
-2–3 key findings (even if early)
 
 ## Business Questions + Objectives
 
 ### Objectives
+
 1. Clean and normalize imported data
 
-2.Convert Taiwan Dollar (TWD) values to USD
+2. Convert Taiwan Dollar (TWD) values to USD
 
-3.Engineer behavioral and utilization features
+3. Engineer behavioral and utilization features
 
-4.Explore associations with default risk
+4. Explore associations with default risk
 
-5.Deliver business-ready metrics and interpretations
-
+5. Deliver business-ready metrics and interpretations
 
 ### Questions
 ###### Examples (keep it simple):
 
-What behaviors are most associated with default?
+1. What behaviors are most associated with default?
 
-How does delinquency relate to default?
+2. How does delinquency relate to default?
 
-Does utilization signal risk?
+3. Does utilization signal risk?
+
 ## Dataset Overview
 The dataset comes from Kaggle: “Default of Credit Card Clients”. It contains 30,000 anonymized credit card customer records with six months of billing and payment history, demographic attributes, and a default indicator. Features include monthly statement balances (`bill_amt1` - `bill_amt_6`), payment amounts (`pay_amt1`-`pay_amt6`), and repayment status (`pay_0`–`pay_6`), along with customer attributes like age, credit limit, education, and marriage status.
 
@@ -59,6 +53,16 @@ Imported raw CSV into a PostgreSQL landing table to preserve original values.
  ![alt text](https://attachment:37d3ecf4-1d9b-4335-85a4-73323a5cc151.png "Logo Title Text 1")
  ![image.png](attachment:37d3ecf4-1d9b-4335-85a4-73323a5cc151.png)
 ## Methodology
+-------------------
+##### sample 
+#### Data Exploration and Cleaning: Thorough scrutiny and cleaning of the data, including handling missing values and outliers.
+#### Feature Engineering: Creation and selection of features that improve model performance.
+#### Exploratory Data Analysis (EDA): In-depth visualization of data distributions, correlations, and other patterns.
+#### Model Selection: Comparative analysis of machine learning models such as Random Forest, Gradient Boosting, and KNN.
+#### Hyperparameter Tuning: Fine-tuning of model parameters to enhance performance.
+#### Model Evaluation: Utilization of metrics like accuracy, precision, recall, F1 score, and AUC-ROC for comprehensive performance evaluation.
+#### Deployment: Steps and methodologies for deploying the model into a live, production environment.
+-------------------
 ## Feature Engineering
 | Feature                   | Description                              |
 | ------------------------- | ---------------------------------------- |
@@ -74,8 +78,29 @@ Imported raw CSV into a PostgreSQL landing table to preserve original values.
 
 
 ## Analysis + Findings
+default rate overall
+default rate by worst delinquency
+default rate by utilization bucket
+##### paste charts here
+* Customers with higher utilization ratios (>0.8) have significantly higher default rates compared to those below 0.5.
+* A greater number of late months correlates with higher probabilities of default.
+* Payment coverage ratio below 0.9 is associated with elevated risk.
+* Worst payment status consistently predicts future delinquency.
+## Business Implications
+
+These insights could be used by credit risk teams to prioritize interventions, flag accounts for closer monitoring, and improve early-warning systems. Key features like utilization and payment coverage can inform policy changes and risk scoring.
+
 ## Reccommendations
 ### Limitations
+
+Example:
+
+no true loss / recovery data
+
+statement balances are snapshots, not charges
+
+-------------------------------------
+### DELETE 
 Project Title
 
 Credit Card Default Risk Analysis (SQL + Feature Engineering in PostgreSQL)
