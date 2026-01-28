@@ -1,10 +1,39 @@
-# credit_risk
-Default Credit Risk analysis
+#Default Credit Risk analysis
+## Project Background
 ## Executive Summary
-## Business Questions
+1. What you analyzed
+
+2. What tools you used
+
+3. What you built (tables + features)
+
+2–3 key findings (even if early)
+
+## Business Questions + Objectives
+Examples (keep it simple):
+
+What behaviors are most associated with default?
+
+How does delinquency relate to default?
+
+Does utilization signal risk?
 ## Dataset Overview
 ### Data Pipeline
+## Methodology
 ## Feature Engineering
+| Feature                   | Description                              |
+| ------------------------- | ---------------------------------------- |
+| `limit_bal_usd`           | Credit limit in USD                      |
+| `total_bill_amt_usd`      | Sum of six months of billing             |
+| `total_pay_amt_usd`       | Sum of six months of payments            |
+| `avg_monthly_balance_usd` | Average monthly balance                  |
+| `avg_pay_amt_usd`         | Average payment per month                |
+| `util_proxy_usd`          | Average balance relative to credit limit |
+| `payment_coverage_ratio`  | Total paid vs total billed               |
+| `worst_payment_status`    | Worst delinquency status over time       |
+| `late_months_count`       | Count of months with late payments       |
+
+
 ## Analysis + Findings
 ## Reccommendations
 ### Limitations
@@ -14,23 +43,10 @@ Credit Card Default Risk Analysis (SQL + Feature Engineering in PostgreSQL)
 
 1. Executive Summary (5–8 lines)
 
-What you analyzed
-
-What tools you used
-
-What you built (tables + features)
-
-2–3 key findings (even if early)
 
 2. Business Questions
 
-Examples (keep it simple):
 
-What behaviors are most associated with default?
-
-How does delinquency relate to default?
-
-Does utilization signal risk?
 
 3. Dataset Overview
 
