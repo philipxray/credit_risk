@@ -1,6 +1,13 @@
 # credit_risk
 Default Credit Risk analysis
 ## Executive Summary
+## Business Questions
+## Dataset Overview
+### Data Pipeline
+## Feature Engineering
+## Analysis + Findings
+## Reccommendations
+### Limitations
 Project Title
 
 Credit Card Default Risk Analysis (SQL + Feature Engineering in PostgreSQL)
