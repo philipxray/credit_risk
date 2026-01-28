@@ -1,6 +1,6 @@
-## credit_risk
+# credit_risk
 Default Credit Risk analysis
-#Executive Summary
+## Executive Summary
 Project Title
 
 Credit Card Default Risk Analysis (SQL + Feature Engineering in PostgreSQL)
