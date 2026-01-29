@@ -44,12 +44,32 @@ I. Yeh. "Default of Credit Card Clients,"
 UCI Machine Learning Repository, 2009. 
 [Online]. Available: (https://doi.org/10.24432/C55S3H.)
 ### Data Pipeline
-#### Landing Raw Data
-Imported raw CSV into a PostgreSQL landing table to preserve original values.
-#### Data Quality Issues
+To simulate a real analytics workflow, I used a multi-table approach:
+1. `credit_raw` (Landing Table)   
+    * Stores imported CSV data in a “raw” state.
+    * Used for initial ingestion and data checks.
+    * Goal: preserve original structure before transformations.
+2) `credit_usd` (Cleaned + Currency Converted)
+    * Converts TWD values to USD using a conversion rate:
+    * 1 TWD = 0.032 USD
+    * Standardizes column names
+    * Ensures consistent numeric types for analysis
+3) `credit_features` (Analytics / Feature Table)
+    * Contains engineered features used for analysis and segmentation:
+        * totals
 
+        * averages
+        * delinquency behavior
+        * utilization proxy
+
+### Data Cleaning Notes
+#### During import and validation, several real-world data issues were handled:
+* The dataset contained a hidden BOM character causing issues with integer casting.
+* Header Row Imported as Data
+* The CSV header row was included as a record during import, causing MIN() and MAX() checks to return unexpected results. This row was removed from analysis.
+* Column Name Differences (PAY_0 vs PAY_1)
+* The dataset uses PAY_0 (not PAY_1), which required alignment between schema and source CSV.
 * BOM character in header resolved
-
 * Filtered header row from data
 
 * Ensured numeric conversion and type safety
@@ -114,79 +134,3 @@ no true loss / recovery data
 
 statement balances are snapshots, not charges
 
--------------------------------------
-### DELETE 
-Project Title
-
-Credit Card Default Risk Analysis (SQL + Feature Engineering in PostgreSQL)
-
-1. Executive Summary (5–8 lines)
-
-
-2. Business Questions
-
-
-
-3. Dataset Overview
-
-Kaggle dataset name + source
-
-Rows/columns
-
-What the target is (default_flag)
-
-What the main feature groups are (bills, payments, delinquency)
-
-4. Data Pipeline
-
-This is where you beat most entry-level analysts:
-
-credit_raw (landing table)
-
-credit_usd (cleaned + converted)
-
-credit_features (engineered metrics)
-
-5. Feature Engineering
-
-List the features you created and why:
-
-total bills / total payments
-
-avg monthly balance
-
-utilization proxy
-
-late month count
-
-worst payment status
-
-6. Analysis + Findings
-
-Use charts later if you want, but at minimum:
-
-default rate overall
-
-default rate by worst delinquency
-
-default rate by utilization bucket
-
-7. Recommendations
-
-Example:
-
-flag customers with 2+ late months
-
-monitor high utilization + low payment coverage
-
-8. Limitations
-
-Example:
-
-no true loss / recovery data
-
-statement balances are snapshots, not charges
-
-9. Appendix (SQL)
-
-Include the key queries you used.
