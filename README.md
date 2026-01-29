@@ -1,192 +1,286 @@
-# Default Credit Risk analysis
-## Project Background
+# Credit Risk Analysis (SQL + PostgreSQL)
+### Project Overview
 
-## Executive Summary
-This project analyzes credit card payment behavior using an anonymized dataset from the UCI Machine Learning Repository. The objective is to understand patterns in billing, payment activity, and delinquency in order to identify key indicators associated with default risk. I built a data pipeline using PostgreSQL, engineered features, and performed risk summarization that could inform credit risk decision-making.
+This project analyzes a credit card default dataset to explore patterns that may help predict default risk. Using PostgreSQL, I cleaned and transformed the data, converted financial values from Taiwan Dollars (TWD) to U.S. Dollars (USD), engineered risk-focused features, and generated summary outputs that can be used for reporting and dashboarding.
 
-## Business Questions
+The goal of this project is to demonstrate practical data analyst skills including:
 
-#### This project focuses on practical stakeholder-style questions such as:
-1. What is the overall default rate in the dataset?
+   * Data cleaning and validation in SQL
+   * Feature engineering for real-world business questions
+   * Credit risk metric design and interpretation
+   * Preparing analysis-ready tables for visualization
 
-2. How does delinquency (late payment behavior) relate to default?
+### Business Questions
 
-3. Do high utilization and low payment coverage correlate with higher default risk?
+#### This project focuses on questions commonly asked in credit risk and lending analytics:
 
-4.  Which engineered behavioral features are most useful for identifying risk?
+   * What customer characteristics are most associated with default risk?
+   * How does repayment history relate to default outcomes?
+   * How do balances and payments differ between default vs. non-default accounts?
+   * Which segments show the highest default rates?
 
-5.  What behaviors are most associated with default?
+### Dataset
+Default of Credit Card Clients Dataset (Taiwan)
 
-6. How does delinquency relate to default?
+Source: UCI Machine Learning Respitory 
+##### I. Yeh. "Default of Credit Card Clients," UCI Machine Learning Repository, 2009. [Online]. Available: https://doi.org/10.24432/C55S3H.
 
-7.  Does utilization signal risk?
+#### Dataset contents include:
 
-### Objectives
+Credit limit (`limit_bal`)
 
-1. Clean and normalize imported data
+Demographics (`SEX`, `EDUCATION`, `MARRIAGE`, `AGE`)
 
-2. Convert Taiwan Dollar (TWD) values to USD
+Repayment status history (`pay_0,`- `pay_6`)
 
-3. Engineer behavioral and utilization features
+Monthly statement balances (`bill_amt1_usd`-`bill_amt6_usd)
 
-4. Explore associations with default risk
+Monthly payments (`pay_amt1_usd)
 
-5. Deliver business-ready metrics and interpretations
+Default indicator (`default_payment_next_month`)
 
+Target variable:
 
+`default_flag` (1 = defaulted, 0 = did not default)
 
-## Dataset Overview
-The dataset comes from Kaggle: “Default of Credit Card Clients”. It contains 30,000 anonymized credit card customer records with six months of billing and payment history, demographic attributes, and a default indicator. Features include monthly statement balances (`bill_amt1` - `bill_amt_6`), payment amounts (`pay_amt1`-`pay_amt6`), and repayment status (`pay_0`–`pay_6`), along with customer attributes like age, credit limit, education, and marriage status.
+### Tools Used
 
-(https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients)
+* PostgreSQL (SQL)
+* pgAdmin 4 (database administration + CSV import)
 
-I. Yeh. "Default of Credit Card Clients,"
-UCI Machine Learning Repository, 2009. 
-[Online]. Available: (https://doi.org/10.24432/C55S3H.)
-### Data Pipeline
-#### Landing Raw Data
-Imported raw CSV into a PostgreSQL landing table to preserve original values.
-#### Data Quality Issues
+### Data Preparation Workflow
+#### Step 1: Raw Table Creation
 
-* BOM character in header resolved
+A raw landing table was created to store imported values in a structured format.
 
-* Filtered header row from data
+DROP TABLE IF EXISTS `credit_raw`;
 
-* Ensured numeric conversion and type safety
+CREATE TABLE `credit_raw` (
+    `id` INTEGER,
+    `limit_bal` INTEGER,
+    sex INTEGER,
+    education INTEGER,
+    marriage INTEGER,
+    age INTEGER,
+    pay_0 INTEGER,
+    pay_2 INTEGER,
+    pay_3 INTEGER,
+    pay_4 INTEGER,
+    pay_5 INTEGER,
+    pay_6 INTEGER,
+    bill_amt1 INTEGER,
+    bill_amt2 INTEGER,
+    bill_amt3 INTEGER,
+    bill_amt4 INTEGER,
+    bill_amt5 INTEGER,
+    bill_amt6 INTEGER,
+    pay_amt1 INTEGER,
+    pay_amt2 INTEGER,
+    pay_amt3 INTEGER,
+    pay_amt4 INTEGER,
+    pay_amt5 INTEGER,
+    pay_amt6 INTEGER,
+    default_payment_next_month INTEGER
+);
 
- #### Staging & Core Table
- ##### Built a staging table with proper numeric types (`INTEGER`, `NUMERIC`) and base cleaned values.
- ![alt text](https://attachment:37d3ecf4-1d9b-4335-85a4-73323a5cc151.png "Logo Title Text 1")
- ![image.png](attachment:37d3ecf4-1d9b-4335-85a4-73323a5cc151.png)
- 
-### Tools & Technologies
- PostgreSQL (database + SQL analytics)
+Step 2: CSV Import (pgAdmin 4)
 
-pgAdmin 4 (query execution + database management)
+The dataset was imported using pgAdmin’s Import tool with the Header option enabled, ensuring column names were not loaded as a data row.
 
-CSV dataset import
+Currency Conversion (TWD to USD)
 
-(Optional for visuals) Python / Excel / Tableau / Power BI
-## Methodology
--------------------
-* #### Data Exploration and Cleaning: Thorough scrutiny and cleaning of the data, including handling missing values and outliers.
-* #### Feature Engineering: Creation and selection of features that improve analysis.
-* #### Exploratory Data Analysis (EDA): In-depth visualization of data distributions, correlations, and other patterns.
-* ### Deployment: Steps and methodologies for data preperation and analysis. 
--------------------
-## Feature Engineering
-| Feature                   | Description                              |
-| ------------------------- | ---------------------------------------- |
-| `limit_bal_usd`           | Credit limit in USD                      |
-| `total_bill_amt_usd`      | Sum of six months of billing             |
-| `total_pay_amt_usd`       | Sum of six months of payments            |
-| `avg_monthly_balance_usd` | Average monthly balance                  |
-| `avg_pay_amt_usd`         | Average payment per month                |
-| `util_proxy_usd`          | Average balance relative to credit limit |
-| `payment_coverage_ratio`  | Total paid vs total billed               |
-| `worst_payment_status`    | Worst delinquency status over time       |
-| `late_months_count`       | Count of months with late payments       |
+The dataset financial values are recorded in Taiwan Dollars (TWD). For easier interpretation, the project converts monetary fields into USD using:
 
+Conversion rate: 1 TWD = 0.032 USD
 
-## Analysis + Findings
+A USD-converted table was created so that all analysis can reference consistent currency fields.
 
-### Analysis
-default rate overall
-default rate by worst delinquency
-default rate by utilization bucket
-##### paste charts here
-* Customers with higher utilization ratios (>0.8) have significantly higher default rates compared to those below 0.5.
-* A greater number of late months correlates with higher probabilities of default.
-* Payment coverage ratio below 0.9 is associated with elevated risk.
-* Worst payment status consistently predicts future delinquency.
+DROP TABLE IF EXISTS credit_usd;
 
-  ### Other Findings
-## Business Implications
+CREATE TABLE credit_usd AS
+SELECT
+    id,
+    (limit_bal * 0.032)::numeric(12,3) AS limit_bal_usd,
+    sex,
+    education,
+    marriage,
+    age,
+    pay_0, pay_2, pay_3, pay_4, pay_5, pay_6,
 
-These insights could be used by credit risk teams to prioritize interventions, flag accounts for closer monitoring, and improve early-warning systems. Key features like utilization and payment coverage can inform policy changes and risk scoring.
+    (bill_amt1 * 0.032)::numeric(14,3) AS bill_amt1_usd,
+    (bill_amt2 * 0.032)::numeric(14,3) AS bill_amt2_usd,
+    (bill_amt3 * 0.032)::numeric(14,3) AS bill_amt3_usd,
+    (bill_amt4 * 0.032)::numeric(14,3) AS bill_amt4_usd,
+    (bill_amt5 * 0.032)::numeric(14,3) AS bill_amt5_usd,
+    (bill_amt6 * 0.032)::numeric(14,3) AS bill_amt6_usd,
 
-## Reccommendations
-### Limitations
+    (pay_amt1 * 0.032)::numeric(14,3) AS pay_amt1_usd,
+    (pay_amt2 * 0.032)::numeric(14,3) AS pay_amt2_usd,
+    (pay_amt3 * 0.032)::numeric(14,3) AS pay_amt3_usd,
+    (pay_amt4 * 0.032)::numeric(14,3) AS pay_amt4_usd,
+    (pay_amt5 * 0.032)::numeric(14,3) AS pay_amt5_usd,
+    (pay_amt6 * 0.032)::numeric(14,3) AS pay_amt6_usd,
 
-Example:
+    default_payment_next_month AS default_flag
+FROM credit_raw;
+
+Feature Engineering
 
-no true loss / recovery data
+To support credit risk analysis, a feature table was created with metrics that reflect customer exposure, payment behavior, and delinquency risk.
+
+Features Created
+
+total_bill_amt_usd: total statement balance across 6 months
+
+total_pay_amt_usd: total payments across 6 months
+
+avg_monthly_bill_usd: average monthly statement balance
+
+avg_monthly_pay_usd: average monthly payment
+
+worst_pay_status: maximum delinquency value across repayment status columns
+
+any_delinquency_flag: indicates whether the customer was ever delinquent
+
+DROP TABLE IF EXISTS credit_features;
+
+CREATE TABLE credit_features AS
+SELECT
+    id,
+    limit_bal_usd,
+    sex,
+    education,
+    marriage,
+    age,
+    default_flag,
+
+    (bill_amt1_usd + bill_amt2_usd + bill_amt3_usd + bill_amt4_usd + bill_amt5_usd + bill_amt6_usd)
+        AS total_bill_amt_usd,
+
+    (pay_amt1_usd + pay_amt2_usd + pay_amt3_usd + pay_amt4_usd + pay_amt5_usd + pay_amt6_usd)
+        AS total_pay_amt_usd,
+
+    ((bill_amt1_usd + bill_amt2_usd + bill_amt3_usd + bill_amt4_usd + bill_amt5_usd + bill_amt6_usd) / 6.0)
+        AS avg_monthly_bill_usd,
+
+    ((pay_amt1_usd + pay_amt2_usd + pay_amt3_usd + pay_amt4_usd + pay_amt5_usd + pay_amt6_usd) / 6.0)
+        AS avg_monthly_pay_usd,
+
+    GREATEST(pay_0, pay_2, pay_3, pay_4, pay_5, pay_6)
+        AS worst_pay_status,
+
+    CASE
+        WHEN GREATEST(pay_0, pay_2, pay_3, pay_4, pay_5, pay_6) >= 1 THEN 1
+        ELSE 0
+    END AS any_delinquency_flag
 
-statement balances are snapshots, not charges
+FROM credit_usd;
 
--------------------------------------
-### DELETE 
-Project Title
+Data Validation and Quality Checks
 
-Credit Card Default Risk Analysis (SQL + Feature Engineering in PostgreSQL)
+Several checks were used to confirm the dataset loaded correctly and to understand value ranges.
 
-1. Executive Summary (5–8 lines)
+Record Count
+SELECT COUNT(*) AS row_count
+FROM credit_raw;
 
+Value Range Checks (Limits and Totals)
+SELECT
+    MIN(limit_bal_usd) AS min_limit,
+    MAX(limit_bal_usd) AS max_limit
+FROM credit_usd;
 
-2. Business Questions
+SELECT
+    MIN(total_bill_amt_usd) AS min_total_bill,
+    MAX(total_bill_amt_usd) AS max_total_bill,
+    MIN(total_pay_amt_usd) AS min_total_pay,
+    MAX(total_pay_amt_usd) AS max_total_pay
+FROM credit_features;
 
+Negative Statement Balances
 
+A small number of accounts have negative statement balances, which can occur due to refunds, charge reversals, or overpayments. These values were retained as valid credit account behavior.
 
-3. Dataset Overview
+SELECT COUNT(*) AS negative_total_bill_count
+FROM credit_features
+WHERE total_bill_amt_usd < 0;
 
-Kaggle dataset name + source
+Analysis Queries
+Default Rate (Overall)
+SELECT
+    default_flag,
+    COUNT(*) AS customers,
+    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct_of_total
+FROM credit_features
+GROUP BY default_flag
+ORDER BY default_flag;
 
-Rows/columns
+Default Rate by Delinquency (Any Delinquency Flag)
+SELECT
+    any_delinquency_flag,
+    COUNT(*) AS customers,
+    ROUND(AVG(default_flag::numeric), 4) AS default_rate
+FROM credit_features
+GROUP BY any_delinquency_flag
+ORDER BY any_delinquency_flag;
 
-What the target is (default_flag)
+Default Rate by Worst Pay Status
+SELECT
+    worst_pay_status,
+    COUNT(*) AS customers,
+    ROUND(AVG(default_flag::numeric), 4) AS default_rate
+FROM credit_features
+GROUP BY worst_pay_status
+ORDER BY worst_pay_status;
 
-What the main feature groups are (bills, payments, delinquency)
+Average Balance and Payment by Default Flag
+SELECT
+    default_flag,
+    ROUND(AVG(avg_monthly_bill_usd), 2) AS avg_monthly_bill_usd,
+    ROUND(AVG(avg_monthly_pay_usd), 2) AS avg_monthly_pay_usd,
+    ROUND(AVG(total_bill_amt_usd), 2) AS avg_total_bill_usd,
+    ROUND(AVG(total_pay_amt_usd), 2) AS avg_total_pay_usd
+FROM credit_features
+GROUP BY default_flag
+ORDER BY default_flag;
 
-4. Data Pipeline
+Credit Utilization (Estimated)
 
-This is where you beat most entry-level analysts:
+This metric compares average monthly balance to credit limit.
 
-credit_raw (landing table)
+SELECT
+    id,
+    limit_bal_usd,
+    avg_monthly_bill_usd,
+    CASE
+        WHEN limit_bal_usd = 0 THEN NULL
+        ELSE ROUND(avg_monthly_bill_usd / limit_bal_usd, 4)
+    END AS utilization_rate,
+    default_flag
+FROM credit_features;
 
-credit_usd (cleaned + converted)
+Recommended Visuals
 
-credit_features (engineered metrics)
+These visuals are ideal for a portfolio project and clearly communicate results:
 
-5. Feature Engineering
+Default rate (bar chart)
 
-List the features you created and why:
+Default rate by worst pay status (bar chart)
 
-total bills / total payments
+Default rate by any delinquency flag (bar chart)
 
-avg monthly balance
+Average monthly bill vs average monthly payment by default flag (side-by-side bar chart)
 
-utilization proxy
+Distribution of utilization rate (histogram)
 
-late month count
+Utilization rate vs default flag (boxplot)
 
-worst payment status
+Key Findings (Summary)
 
-6. Analysis + Findings
+Customers with any delinquency history show higher default rates than customers with no delinquency history.
 
-Use charts later if you want, but at minimum:
+Default rates increase as repayment status worsens.
 
-default rate overall
+Average balances and payment behavior differ between default and non-default groups.
 
-default rate by worst delinquency
-
-default rate by utilization bucket
-
-7. Recommendations
-
-Example:
-
-flag customers with 2+ late months
-
-monitor high utilization + low payment coverage
-
-8. Limitations
-
-Example:
-
-no true loss / recovery data
-
-statement balances are snapshots, not charges
-
-9. Appendix (SQL)
-
-Include the key queries you used.
+Negative statement balances exist in a small number of accounts and likely reflect refunds or overpayment behavior.
