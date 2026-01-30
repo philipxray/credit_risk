@@ -1,0 +1,28 @@
+CREATE TABLE credit_staging AS
+SELECT
+    CAST(id AS TEXT) AS id,
+    CAST(limit_bal AS TEXT) AS limit_bal,
+    CAST(sex AS TEXT) AS sex,
+    CAST(education AS TEXT) AS education,
+    CAST(marriage AS TEXT) AS marriage,
+    CAST(age AS TEXT) AS age,
+    CAST(pay_0 AS TEXT) AS pay_0,
+    CAST(pay_2 AS TEXT) AS pay_2,
+    CAST(pay_3 AS TEXT) AS pay_3,
+    CAST(pay_4 AS TEXT) AS pay_4,
+    CAST(pay_5 AS TEXT) AS pay_5,
+    CAST(pay_6 AS TEXT) AS pay_6,
+    CAST(bill_amt1 AS TEXT) AS bill_amt1,
+    CAST(bill_amt2 AS TEXT) AS bill_amt2,
+    CAST(bill_amt3 AS TEXT) AS bill_amt3,
+    CAST(bill_amt4 AS TEXT) AS bill_amt4,
+    CAST(bill_amt5 AS TEXT) AS bill_amt5,
+    CAST(bill_amt6 AS TEXT) AS bill_amt6,
+    CAST(pay_amt1 AS TEXT) AS pay_amt1,
+    CAST(pay_amt2 AS TEXT) AS pay_amt2,
+    CAST(pay_amt3 AS TEXT) AS pay_amt3,
+    CAST(pay_amt4 AS TEXT) AS pay_amt4,
+    CAST(pay_amt5 AS TEXT) AS pay_amt5,
+    CAST(pay_amt6 AS TEXT) AS pay_amt6,
+    CAST(default_payment_next_month AS TEXT) AS default_payment_next_month
+FROM credit_raw;
