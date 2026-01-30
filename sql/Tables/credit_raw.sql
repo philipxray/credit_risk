@@ -34,3 +34,12 @@ NULLIF(
   regexp_replace(id, '[^0-9]', '', 'g'),
   ''
 )::INTEGER
+
+-- check/confirm column data type and add column 'limit_bal'
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'credit_raw'
+  AND column_name = 'limit_bal';
+
+
+
