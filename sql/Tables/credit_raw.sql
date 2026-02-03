@@ -1,3 +1,6 @@
+-- Note: The original file contains an a header of variable names that is used for predictive models. 
+-- this row needs to be removed prior to importing the file. The simplist method to do this is to open the file in excel and manually remove/delete the row.
+
 CREATE TABLE credit_raw (
     id INTEGER,
     limit_bal INTEGER,
@@ -30,16 +33,10 @@ CREATE TABLE credit_raw (
     default_payment_next_month INTEGER
 );
 
-NULLIF(
-  regexp_replace(id, '[^0-9]', '', 'g'),
-  ''
-)::INTEGER
-
 -- check/confirm that column was created, check column's data type and add column 'limit_bal'
 SELECT column_name, data_type
 FROM information_schema.columns
 WHERE table_name = 'credit_raw'
-  AND column_name = 'limit_bal';
 
 
 
