@@ -52,7 +52,7 @@ Imported raw CSV into a PostgreSQL landing table to preserve original values.
 
 * Filtered header row from data
 
-* Ensured numeric conversion and type safety<img width="354" height="119" alt="image" src="https://github.com/user-attachments/assets/805dbf8d-616c-4340-b408-34d49f0f839e" />
+* Ensured numeric conversion and type safety
 
 
  #### Staging & Core Table
