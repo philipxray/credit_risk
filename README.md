@@ -85,6 +85,14 @@ CREATE TABLE `credit_raw` (
 
 Step 2: CSV Import (pgAdmin 4)
 
+ #### Staging & Core Table
+ ##### Built a staging table with proper numeric types (`INTEGER`, `NUMERIC`) and base cleaned values.
+ ![alt text](https://attachment:37d3ecf4-1d9b-4335-85a4-73323a5cc151.png "Logo Title Text 1")
+ ![image.png](attachment:37d3ecf4-1d9b-4335-85a4-73323a5cc151.png)
+ 
+### Tools & Technologies
+ PostgreSQL (database + SQL analytics)
+
 The dataset was imported using pgAdmin’s Import tool with the Header option enabled, ensuring column names were not loaded as a data row.
 
 Currency Conversion (TWD to USD)
