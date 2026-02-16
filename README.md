@@ -47,155 +47,9 @@ Target variable:
 
 * PostgreSQL (SQL)
 * pgAdmin 4 (database administration + CSV import)
+* Power BI
+* Tableau
 
-### Data Preparation Workflow
-#### Step 1: Raw Table Creation
-
-A raw landing table was created to store imported values in a structured format.
-
-DROP TABLE IF EXISTS `credit_raw`;
-
-CREATE TABLE `credit_raw` (
-    `id` INTEGER,
-    `limit_bal` INTEGER,
-    sex INTEGER,
-    education INTEGER,
-    marriage INTEGER,
-    age INTEGER,
-    pay_0 INTEGER,
-    pay_2 INTEGER,
-    pay_3 INTEGER,
-    pay_4 INTEGER,
-    pay_5 INTEGER,
-    pay_6 INTEGER,
-    bill_amt1 INTEGER,
-    bill_amt2 INTEGER,
-    bill_amt3 INTEGER,
-    bill_amt4 INTEGER,
-    bill_amt5 INTEGER,
-    bill_amt6 INTEGER,
-    pay_amt1 INTEGER,
-    pay_amt2 INTEGER,
-    pay_amt3 INTEGER,
-    pay_amt4 INTEGER,
-    pay_amt5 INTEGER,
-    pay_amt6 INTEGER,
-    default_payment_next_month INTEGER
-);
-
-Step 2: CSV Import (pgAdmin 4)
-
-The dataset was imported using pgAdmin’s Import tool with the Header option enabled, ensuring column names were not loaded as a data row.
-
-Currency Conversion (TWD to USD)
-
-The dataset financial values are recorded in Taiwan Dollars (TWD). For easier interpretation, the project converts monetary fields into USD using:
-
-Conversion rate: 1 TWD = 0.032 USD
-
-A USD-converted table was created so that all analysis can reference consistent currency fields.
-
-DROP TABLE IF EXISTS credit_usd;
-
-CREATE TABLE credit_usd AS
-SELECT
-    id,
-    (limit_bal * 0.032)::numeric(12,3) AS limit_bal_usd,
-    sex,
-    education,
-    marriage,
-    age,
-    pay_0, pay_2, pay_3, pay_4, pay_5, pay_6,
-
-    (bill_amt1 * 0.032)::numeric(14,3) AS bill_amt1_usd,
-    (bill_amt2 * 0.032)::numeric(14,3) AS bill_amt2_usd,
-    (bill_amt3 * 0.032)::numeric(14,3) AS bill_amt3_usd,
-    (bill_amt4 * 0.032)::numeric(14,3) AS bill_amt4_usd,
-    (bill_amt5 * 0.032)::numeric(14,3) AS bill_amt5_usd,
-    (bill_amt6 * 0.032)::numeric(14,3) AS bill_amt6_usd,
-
-    (pay_amt1 * 0.032)::numeric(14,3) AS pay_amt1_usd,
-    (pay_amt2 * 0.032)::numeric(14,3) AS pay_amt2_usd,
-    (pay_amt3 * 0.032)::numeric(14,3) AS pay_amt3_usd,
-    (pay_amt4 * 0.032)::numeric(14,3) AS pay_amt4_usd,
-    (pay_amt5 * 0.032)::numeric(14,3) AS pay_amt5_usd,
-    (pay_amt6 * 0.032)::numeric(14,3) AS pay_amt6_usd,
-
-    default_payment_next_month AS default_flag
-FROM credit_raw;
-
-Feature Engineering
-
-To support credit risk analysis, a feature table was created with metrics that reflect customer exposure, payment behavior, and delinquency risk.
-
-Features Created
-
-total_bill_amt_usd: total statement balance across 6 months
-
-total_pay_amt_usd: total payments across 6 months
-
-avg_monthly_bill_usd: average monthly statement balance
-
-avg_monthly_pay_usd: average monthly payment
-
-worst_pay_status: maximum delinquency value across repayment status columns
-
-any_delinquency_flag: indicates whether the customer was ever delinquent
-
-DROP TABLE IF EXISTS credit_features;
-
-CREATE TABLE credit_features AS
-SELECT
-    id,
-    limit_bal_usd,
-    sex,
-    education,
-    marriage,
-    age,
-    default_flag,
-
-    (bill_amt1_usd + bill_amt2_usd + bill_amt3_usd + bill_amt4_usd + bill_amt5_usd + bill_amt6_usd)
-        AS total_bill_amt_usd,
-
-    (pay_amt1_usd + pay_amt2_usd + pay_amt3_usd + pay_amt4_usd + pay_amt5_usd + pay_amt6_usd)
-        AS total_pay_amt_usd,
-
-    ((bill_amt1_usd + bill_amt2_usd + bill_amt3_usd + bill_amt4_usd + bill_amt5_usd + bill_amt6_usd) / 6.0)
-        AS avg_monthly_bill_usd,
-
-    ((pay_amt1_usd + pay_amt2_usd + pay_amt3_usd + pay_amt4_usd + pay_amt5_usd + pay_amt6_usd) / 6.0)
-        AS avg_monthly_pay_usd,
-
-    GREATEST(pay_0, pay_2, pay_3, pay_4, pay_5, pay_6)
-        AS worst_pay_status,
-
-    CASE
-        WHEN GREATEST(pay_0, pay_2, pay_3, pay_4, pay_5, pay_6) >= 1 THEN 1
-        ELSE 0
-    END AS any_delinquency_flag
-
-FROM credit_usd;
-
-Data Validation and Quality Checks
-
-Several checks were used to confirm the dataset loaded correctly and to understand value ranges.
-
-Record Count
-SELECT COUNT(*) AS row_count
-FROM credit_raw;
-
-Value Range Checks (Limits and Totals)
-SELECT
-    MIN(limit_bal_usd) AS min_limit,
-    MAX(limit_bal_usd) AS max_limit
-FROM credit_usd;
-
-SELECT
-    MIN(total_bill_amt_usd) AS min_total_bill,
-    MAX(total_bill_amt_usd) AS max_total_bill,
-    MIN(total_pay_amt_usd) AS min_total_pay,
-    MAX(total_pay_amt_usd) AS max_total_pay
-FROM credit_features;
 
 Negative Statement Balances
 
@@ -259,9 +113,7 @@ SELECT
     default_flag
 FROM credit_features;
 
-Recommended Visuals
-
-These visuals are ideal for a portfolio project and clearly communicate results:
+Visuals
 
 Default rate (bar chart)
 
