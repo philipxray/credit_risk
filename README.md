@@ -83,7 +83,7 @@ Customers with no delinquency exhibited a default rate of approximately 11.7%, w
 
    Default rates increased consistently as the number of late months increased, suggesting that delinquency frequency captures escalating risk beyond a simple binary flag.
 
-4. Does the severity of delinquency matter?
+3. Does the severity of delinquency matter?
 
    In addition to frequency, delinquency severity was analyzed using the worst recorded repayment status.
 
@@ -102,9 +102,6 @@ Customers with no delinquency exhibited a default rate of approximately 11.7%, w
 |  -2     |       No consumption / no bill activity / paid on time         |
 
 
-
-
-
 #### Negative values (not delinquent)
 -2 = No consumption / no bill activity (often means no balance used that month)
 -1 = Paid in full / paid on time (no delinquency)
@@ -118,5 +115,11 @@ Positive values (delinquent)
 6 = 6 months past due
 7 = 7 months past due
 8 = 8 months past due
-````
+
+4. How does credit utilization relate to default risk?
+
+Customers were segmented using industry-aligned credit utilization thresholds to assess whether higher reliance on credit corresponded with increased default risk.
+<img width="608" height="209" alt="worst_pay_status_buckets" src="https://github.com/user-attachments/assets/7ec67a36-72f8-4f9b-89e5-1b0fbd70ea31" />
+
+
 Across all analyses, delinquency behavior emerged as the strongest predictor of default risk, followed by credit utilization levels. Customers exhibiting repeated late payments or high utilization consistently demonstrated elevated default rates. These findings suggest that early behavioral signals can be used to identify high-risk customers before default occurs, supporting proactive credit risk monitoring and intervention.
