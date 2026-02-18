@@ -77,11 +77,13 @@ Customers with no delinquency exhibited a default rate of approximately 11.7%, w
 
 2. How does the frequency of delinquency impact default risk?
 
- place vis
+  To further refine delinquency risk, customers were segmented by the number of months in which they were late
+  
+<img width="1832" height="326" alt="image" src="https://github.com/user-attachments/assets/5ed2d839-4a1d-4e9b-865c-6d84eeaf50e8" />
 
    Default rates increased consistently as the number of late months increased, suggesting that delinquency frequency captures escalating risk beyond a simple binary flag.
 
-3. Does the severity of delinquency matter?
+4. Does the severity of delinquency matter?
 
    In addition to frequency, delinquency severity was analyzed using the worst recorded repayment status.
 
@@ -99,7 +101,6 @@ Customers with no delinquency exhibited a default rate of approximately 11.7%, w
 |   -1    |     Paid in full            |
 |  -2     |       No consumption / no bill activity / paid on time         |
 
-<img width="1832" height="326" alt="image" src="https://github.com/user-attachments/assets/5ed2d839-4a1d-4e9b-865c-6d84eeaf50e8" />
 
 
 
