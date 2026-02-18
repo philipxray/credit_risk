@@ -61,6 +61,7 @@ Target variable:
 The objective of this analysis is to identify behavioral and usage patterns associated with increased credit default risk. Using engineered features derived from six months of billing and payment history, customers were segmented based on delinquency behavior, credit utilization, and payment coverage. Default rates were then compared across these segments to determine which customer groups exhibit elevated risk.
 
 1. Which customers exhibit higher default risk based on delinquency behavior?
+   
 Customers were first segmented based on whether they experienced any delinquency during the six-month observation period.
 ````
     SELECT
@@ -70,5 +71,51 @@ Customers were first segmented based on whether they experienced any delinquency
 FROM credit_features
 GROUP BY any_delinquency_flag;
 ````
+<img width="495" height="113" alt="image" src="https://github.com/user-attachments/assets/da61458e-474b-4331-9327-1154e0c632c9" />
 
+Customers with no delinquency exhibited a default rate of approximately 11.7%, while customers with at least one delinquent month had a default rate of approximately 42.7%. This represents nearly a 4x increase in default risk, indicating that even a single late payment is a strong early warning signal.
+
+2. How does the frequency of delinquency impact default risk?
+
+ place vis
+
+   Default rates increased consistently as the number of late months increased, suggesting that delinquency frequency captures escalating risk beyond a simple binary flag.
+
+3. Does the severity of delinquency matter?
+
+   In addition to frequency, delinquency severity was analyzed using the worst recorded repayment status.
+
+| Value | Months Past Due |
+|-------|:---------------:| 
+|   0   |   0 months past due /  Revolving / paid normally              |
+|   1    |   1 month past due              |
+|    2   |       2 months past due          |
+|   3    |    3 months past due             |
+|   4    |     4 months past due            |
+|    5   |      5 months past due           |
+|   6    |    6 months past due             |
+|    7   |     7 months past due            |
+|    8   |      8 months past due           |
+|   -1    |     Paid in full            |
+|  -2     |       No consumption / no bill activity / paid on time         |
+
+<img width="1832" height="326" alt="image" src="https://github.com/user-attachments/assets/5ed2d839-4a1d-4e9b-865c-6d84eeaf50e8" />
+
+
+
+
+#### Negative values (not delinquent)
+-2 = No consumption / no bill activity (often means no balance used that month)
+-1 = Paid in full / paid on time (no delinquency)
+0 = Revolving / paid normally (not past due)
+Positive values (delinquent)
+1 = 1 month past due
+2 = 2 months past due
+3 = 3 months past due
+4 = 4 months past due
+5 = 5 months past due
+6 = 6 months past due
+7 = 7 months past due
+8 = 8 months past due
+````
 Across all analyses, delinquency behavior emerged as the strongest predictor of default risk, followed by credit utilization levels. Customers exhibiting repeated late payments or high utilization consistently demonstrated elevated default rates. These findings suggest that early behavioral signals can be used to identify high-risk customers before default occurs, supporting proactive credit risk monitoring and intervention.
