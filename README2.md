@@ -65,21 +65,20 @@ The objective of this analysis is to identify behavioral and usage patterns asso
 ### 1. Which customers exhibit higher default risk based on delinquency behavior?
    
 #### Customers were first segmented based on whether they experienced any delinquency during the six-month observation period.
+<img width="495" height="113" alt="image" src="https://github.com/user-attachments/assets/da61458e-474b-4331-9327-1154e0c632c9" />
 
 <img width="601" height="562" alt="image" src="https://github.com/user-attachments/assets/443e9043-0ee2-4fba-8f05-c84c7ca7d3fa" />
-
-<img width="495" height="113" alt="image" src="https://github.com/user-attachments/assets/da61458e-474b-4331-9327-1154e0c632c9" />
 
 Customers with no delinquency exhibited a default rate of approximately  **11.7%**, while customers with at least one delinquent month had a default rate of approximately **42.7%**. This represents nearly a **4x** **_increase_** in default risk, indicating that even a single late payment is a strong early warning signal.
 
 
 ### 2. How does the frequency of delinquency impact default risk?
 
-Repayment history was further analyzed using two measures:
+* Repayment history was further analyzed using two measures:
 
-Number of late months during the six-month window
+* Number of late months during the six-month window
 
-Maximum delinquency severity (worst_pay_status)
+* Maximum delinquency severity (worst_pay_status)
 
 Although the dataset spans six months, severity values may exceed six because they reflect cumulative months past due at the time of reporting.
 
@@ -88,8 +87,13 @@ Default rates were calculated across both delinquency frequency and severity lev
 Visual to Reference
 
 * 📊 Bar chart: Default rate by late_months_count
+* <img width="1832" height="326" alt="image" src="https://github.com/user-attachments/assets/81b50e2a-d4dd-4fec-ba04-c056cc1dbb17" />
+
 * 📊 Bar chart: Default rate by severity bucket
+<img width="482" height="385" alt="image" src="https://github.com/user-attachments/assets/9fa4ffd6-6e28-4e69-9287-f72edeb7d8af" />
+
 * 📊 Table: Frequency/Severity | Customers | Default Rate
+<img width="472" height="396" alt="image" src="https://github.com/user-attachments/assets/a6464cfb-4356-4648-8973-99b7fb8e8cfe" />
 
 Interpretation
 
@@ -101,12 +105,12 @@ This monotonic relationship indicates that repayment deterioration compounds ris
 
 Average balances, credit utilization, and payment coverage ratios were compared between defaulting and non-defaulting customers.
 
-Reference your comparison chart.
 
-Visual to Reference
+* Table: Default vs Non-Default — Avg Balance, Utilization, Payment Coverage
+  <img width="547" height="241" alt="image" src="https://github.com/user-attachments/assets/a284a448-4911-4448-acfa-adf12698c10f" />
 
-* 📊 Table: Default vs Non-Default — Avg Balance, Utilization, Payment Coverage
 * 📊 Bar chart: Utilization comparison
+
 
 Interpretation
 
@@ -124,19 +128,18 @@ However, repayment behavior differences were more pronounced than balance differ
 
 Customers were segmented using:
 
-Delinquency frequency tiers
+* Delinquency frequency tiers
 
-Delinquency severity tiers
+* Delinquency severity tiers
 
-Utilization buckets
+* Utilization buckets
 
 Default rates were ranked across these segments.
 
-Reference your segment ranking table.
-
-Visual to Reference
-
 📊 Table: Segment | Customers | Default Rate (ranked highest to lowest)
+<img width="678" height="270" alt="image" src="https://github.com/user-attachments/assets/65b5ea83-160f-45ed-b706-0cacb5b58995" />
+<img width="472" height="396" alt="image" src="https://github.com/user-attachments/assets/4cdde816-42cc-4e15-b799-b06250924ee5" />
+
 
 Interpretation
 
@@ -150,20 +153,19 @@ Utilization above 60%
 
 These segments represent concentrated risk pockets within the portfolio.
 
-
 ### 5. What customer characteristics are most associated with default risk?
 
 Across all segment comparisons, the variables most strongly associated with elevated default risk were:
 
-Any history of delinquency
+* Any history of delinquency
 
-Increasing number of late months
+* Increasing number of late months
 
-High delinquency severity
+* High delinquency severity
 
-Utilization above 60%
+* Utilization above 60%
 
-Low payment coverage ratios
+* Low payment coverage ratios
 
 Visual to Reference
 
