@@ -4,7 +4,7 @@ The objective of this analysis is to identify behavioral and financial patterns 
 
 Importantly, while the dataset contains six months of billing records, delinquency severity values may exceed six months because the PAY_STATUS variables reflect cumulative months past due at the time of reporting. Therefore, severity captures long-term distress, whereas late_months_count captures repayment behavior within the six-month observation window. These represent distinct dimensions of risk.
 
-1. Which Customers Exhibit Higher Default Risk?
+> 1. Which Customers Exhibit Higher Default Risk?
 
 Customers were first segmented based on whether they experienced any delinquency during the observation window.
 
@@ -12,15 +12,15 @@ Customers with no late payments demonstrated substantially lower default rates c
 
 This suggests that behavioral repayment history is more predictive of default than static balance levels alone.
 
-2. How Does Repayment History Relate to Default Outcomes?
+> 2. How Does Repayment History Relate to Default Outcomes?
 
 Repayment behavior was analyzed using two measures:
 
-Delinquency frequency (late_months_count)
+* Delinquency frequency (`late_months_count`)
 
-Delinquency severity (worst_pay_status)
+* Delinquency severity (`worst_pay_status`)
 
-Frequency of Late Payments
+* Frequency of Late Payments
 
 Customers were grouped by the number of months they were late during the six-month window. Default rates increased progressively as the number of late months increased. Customers with multiple late months exhibited materially higher default rates compared to those with only one or no late payments.
 
@@ -34,37 +34,37 @@ Default rates increased sharply among customers reaching higher delinquency seve
 
 Together, frequency and severity capture both short-term instability and deeper financial distress.
 
-3. How Do Balances and Payments Differ Between Default and Non-Default Accounts?
+> 3. How Do Balances and Payments Differ Between Default and Non-Default Accounts?
 
 To evaluate financial exposure, average balances, bill amounts, and payment amounts were compared between defaulting and non-defaulting customers.
 
 Defaulting customers generally exhibited:
 
-Higher credit utilization rates
+* Higher credit utilization rates
 
-Lower payment coverage ratios
+* Lower payment coverage ratios
 
-Greater reliance on available credit
+* Greater reliance on available credit
 
 However, absolute balance size alone was not as predictive as repayment behavior metrics. Customers with moderate balances but deteriorating payment patterns were often riskier than customers with higher balances who consistently paid on time.
 
 This suggests that how customers manage their credit is more informative than how much credit they hold.
 
-4. Which Segments Show the Highest Default Rates?
+> 4. Which Segments Show the Highest Default Rates?
 
 Customers were segmented using industry-aligned utilization thresholds:
 
-Non-Users (0%)
+* Non-Users (0%)
 
-Optimal (1–10%)
+* Optimal (1–10%)
 
-Healthy (11–30%)
+* Healthy (11–30%)
 
-Moderate Risk (31–60%)
+* Moderate Risk (31–60%)
 
-High Risk (61–90%)
+* High Risk (61–90%)
 
-Maxed Out (91%+)
+* Maxed Out (91%+)
 
 Default rates increased as utilization rose, particularly above the 60% threshold. Customers in high utilization tiers exhibited meaningfully elevated default rates relative to lower-utilization segments.
 
@@ -72,55 +72,55 @@ When high utilization coincided with repeated delinquency, default risk was sign
 
 This indicates that credit reliance and repayment deterioration interact to compound risk.
 
-5. What Factors Appear Most Related to Default?
+> 5. What Factors Appear Most Related to Default?
 
 Across all segmentation analyses, the strongest associations with default were:
 
-Any history of delinquency
+* Any history of delinquency
 
-Increasing number of late months
+* Increasing number of late months
 
-High delinquency severity (5+ months past due)
+* High delinquency severity (5+ months past due)
 
-Utilization rates above 60%
+* Utilization rates above 60%
 
-Low payment coverage ratios
+* Low payment coverage ratios
 
 Behavioral variables consistently showed larger differences in default rates than static balance measures.
 
 This suggests that repayment deterioration is the dominant driver of default in this portfolio.
 
-6. Are There Early Warning Signs Before Default?
+> 6. Are There Early Warning Signs Before Default?
 
 Default rarely occurred without prior behavioral signals.
 
-Early indicators observed include:
+* Early indicators observed include:
 
-First instance of delinquency
+* First instance of delinquency
 
-Rising utilization above 30%
+* Rising utilization above 30%
 
-Increasing frequency of late payments
+* Increasing frequency of late payments
 
-Declining payment coverage ratio
+* Declining payment coverage ratio
 
 Customers often transitioned from mild delinquency to repeated lateness before reaching severe default states. Monitoring early-stage deterioration may allow for proactive intervention before accounts become deeply distressed.
 
 This highlights the value of early behavioral monitoring in credit risk management.
 
-7. If Only 20% of Accounts Could Be Reviewed, Where Should Focus Be Placed?
+> 7. If Only 20% of Accounts Could Be Reviewed, Where Should Focus Be Placed?
 
 Given limited operational capacity, risk review efforts should concentrate on the highest-risk segments.
 
 The top 20% highest-risk accounts would likely include:
 
-Customers with 3+ late months
+* Customers with 3+ late months
 
-Customers reaching 5+ months past due severity
+* Customers reaching 5+ months past due severity
 
-Customers with utilization above 60%
+* Customers with utilization above 60%
 
-Customers with low payment coverage ratios
+* Customers with low payment coverage ratios
 
 Prioritizing these segments would concentrate review resources on accounts exhibiting the strongest observed risk signals, maximizing potential default mitigation impact.
 
