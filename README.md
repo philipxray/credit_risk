@@ -65,14 +65,7 @@ The objective of this analysis is to identify behavioral and usage patterns asso
 ### 2. Which customers exhibit higher default risk based on delinquency behavior?
    
 Customers were first segmented based on whether they experienced any delinquency during the six-month observation period.
-````
-    SELECT
-    any_delinquency_flag,
-    COUNT(*) AS customers,
-    ROUND(AVG(default_flag)::numeric, 4) AS default_rate
-FROM credit_features
-GROUP BY any_delinquency_flag;
-````
+
 <img width="495" height="113" alt="image" src="https://github.com/user-attachments/assets/da61458e-474b-4331-9327-1154e0c632c9" />
 
 Customers with no delinquency exhibited a default rate of approximately 11.7%, while customers with at least one delinquent month had a default rate of approximately 42.7%. This represents nearly a 4x increase in default risk, indicating that even a single late payment is a strong early warning signal.
