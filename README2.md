@@ -55,13 +55,11 @@ Target variable:
 * pgAdmin 4 (database administration + CSV import)
 * Power BI
 * Tableau
-
+****
 # Analysis
-
+****
 The objective of this analysis is to identify behavioral and usage patterns associated with increased credit default risk. Using engineered features derived from six months of billing and payment history, customers were segmented based on delinquency behavior, credit utilization, and payment coverage. Default rates were then compared across these segments to determine which customer groups exhibit elevated risk.
-
-
-
+****
 ### 1. Which customers exhibit higher default risk based on delinquency behavior?
    
 #### Customers were first segmented based on whether they experienced any delinquency during the six-month observation period.
@@ -70,8 +68,7 @@ The objective of this analysis is to identify behavioral and usage patterns asso
 <img width="601" height="562" alt="image" src="https://github.com/user-attachments/assets/443e9043-0ee2-4fba-8f05-c84c7ca7d3fa" />
 
 Customers with no delinquency exhibited a default rate of approximately  **11.7%**, while customers with at least one delinquent month had a default rate of approximately **42.7%**. This represents nearly a **4x** **_increase_** in default risk, indicating that even a single late payment is a strong early warning signal.
-
-
+****
 ### 2. How does the frequency of delinquency impact default risk?
 
 * Repayment history was further analyzed using two measures:
@@ -100,7 +97,7 @@ Interpretation
 Default rates increased progressively as the number of late months increased. Similarly, customers reaching higher delinquency severity levels exhibited substantially higher default rates.
 
 This monotonic relationship indicates that repayment deterioration compounds risk over time rather than occurring suddenly.
-
+****
 ### 3. How do balances and payments differ between default vs. non-default accounts?
 
 Average balances, credit utilization, and payment coverage ratios were compared between defaulting and non-defaulting customers.
