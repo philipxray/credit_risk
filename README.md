@@ -124,21 +124,7 @@ To further refine delinquency risk, customers were segmented by the number of mo
 |   -1    |     Paid in full            |
 |  -2     |       No consumption / no bill activity / paid on time         |
 
-````
-#### Negative values (not delinquent)
--2 = No consumption / no bill activity (often means no balance used that month)
--1 = Paid in full / paid on time (no delinquency)
-0 = Revolving / paid normally (not past due)
-Positive values (delinquent)
-1 = 1 month past due
-2 = 2 months past due
-3 = 3 months past due
-4 = 4 months past due
-5 = 5 months past due
-6 = 6 months past due
-7 = 7 months past due
-8 = 8 months past due
-````
+
 ### 4. How does credit utilization relate to default risk?
 
 Customers were segmented using industry-aligned credit utilization thresholds to assess whether higher reliance on credit corresponded with increased default risk.
