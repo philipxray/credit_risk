@@ -40,8 +40,10 @@ Severity of Delinquency
 
 Customers were also segmented based on the maximum delinquency severity reached during any billing cycle. Severity values (e.g., 5+ months past due) represent cumulative delinquency duration at that time and may reflect distress that began prior to the observation period.
 
-
 <img width="665" height="391" alt="image" src="https://github.com/user-attachments/assets/cf4b7a55-9862-477c-8416-0bc8a4e2f668" />
+
+<img width="629" height="429" alt="image" src="https://github.com/user-attachments/assets/72ac12f9-a612-4a9c-a8fe-a2c872f47729" />
+
 
 Default rates increased sharply among customers reaching higher delinquency severity tiers, suggesting that prolonged repayment failure is one of the strongest predictors of eventual default.
 
@@ -60,6 +62,9 @@ Defaulting customers generally exhibited:
 * Greater reliance on available credit
   
 <img width="758" height="118" alt="image" src="https://github.com/user-attachments/assets/969e0a6d-826d-41ef-9fa5-cc1fd34620ea" />
+
+<img width="770" height="722" alt="image" src="https://github.com/user-attachments/assets/e054fc45-5702-4cf5-9b1f-e984a21f91f7" />
+
 
 However, absolute balance size alone was not as predictive as repayment behavior metrics. Customers with moderate balances but deteriorating payment patterns were often riskier than customers with higher balances who consistently paid on time.
 
@@ -82,6 +87,9 @@ Customers were segmented using industry-aligned utilization thresholds:
 * Maxed Out (91%+)
   
 <img width="695" height="239" alt="image" src="https://github.com/user-attachments/assets/fd046983-6d7e-49cd-9945-2c6d4376c3dc" />
+
+<img width="590" height="451" alt="image" src="https://github.com/user-attachments/assets/925b2ede-b088-4160-8c5f-fbea3d717279" />
+
 
 Default rates increased as utilization rose, particularly above the 60% threshold. Customers in high utilization tiers exhibited meaningfully elevated default rates relative to lower-utilization segments.
 
@@ -125,6 +133,8 @@ Default rarely occurred without prior behavioral signals.
   
 <img width="894" height="118" alt="image" src="https://github.com/user-attachments/assets/e600d599-99af-4dde-ac2a-db5ea357c4ba" />
 
+<img width="565" height="572" alt="image" src="https://github.com/user-attachments/assets/6bf30e2f-62c4-4f0a-87c0-7ee5265c80c9" />
+
 
 Customers often transitioned from mild delinquency to repeated lateness before reaching severe default states. Monitoring early-stage deterioration may allow for proactive intervention before accounts become deeply distressed.
 
@@ -143,6 +153,9 @@ The top 20% highest-risk accounts would likely include:
 * Customers with utilization above 60%
 
 * Customers with low payment coverage ratios
+
+<img width="1749" height="369" alt="image" src="https://github.com/user-attachments/assets/2a23a061-714b-44ed-bf6e-77f0ca3b91ab" />
+
 
 Prioritizing these segments would concentrate review resources on accounts exhibiting the strongest observed risk signals, maximizing potential default mitigation impact.
 ****
