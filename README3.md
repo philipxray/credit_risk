@@ -33,7 +33,8 @@ Customers were grouped by the number of months they were late during the six-mon
 
 This monotonic trend indicates that repeated delinquency reflects escalating financial instability.
 
-<img width="1832" height="326" alt="late_months_monotonic_trend" src="https://github.com/user-attachments/assets/baae8648-98ba-4945-a3ce-f59623646bea" />
+<img width="679" height="455" alt="image" src="https://github.com/user-attachments/assets/2e0a72a7-0a63-4702-a567-aad262299db2" />
+
 
 Severity of Delinquency
 
