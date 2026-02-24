@@ -7,6 +7,7 @@ Importantly, while the dataset contains six months of billing records, delinquen
 > 1. Which Customers Exhibit Higher Default Risk?
 ****
 Customers were first segmented based on whether they experienced any delinquency during the observation window.
+<img width="691" height="118" alt="image" src="https://github.com/user-attachments/assets/f63bf330-e87b-43e5-9f06-67295a14124e" />
 
 Customers with no late payments demonstrated substantially lower default rates compared to customers with at least one late month. The presence of even a single delinquency corresponded with a sharp increase in default probability, indicating that repayment behavior deterioration is an early and meaningful risk signal.
 
@@ -21,14 +22,20 @@ Repayment behavior was analyzed using two measures:
 * Delinquency severity (`worst_pay_status`)
 
 * Frequency of Late Payments
+  
+<img width="674" height="278" alt="late_months_count_table" src="https://github.com/user-attachments/assets/4b546c71-5291-4c8d-95aa-1d32e71e0e78" />
 
 Customers were grouped by the number of months they were late during the six-month window. Default rates increased progressively as the number of late months increased. Customers with multiple late months exhibited materially higher default rates compared to those with only one or no late payments.
 
 This monotonic trend indicates that repeated delinquency reflects escalating financial instability.
+<img width="1832" height="326" alt="late_months_monotonic_trend" src="https://github.com/user-attachments/assets/baae8648-98ba-4945-a3ce-f59623646bea" />
 
 Severity of Delinquency
 
 Customers were also segmented based on the maximum delinquency severity reached during any billing cycle. Severity values (e.g., 5+ months past due) represent cumulative delinquency duration at that time and may reflect distress that began prior to the observation period.
+
+
+<img width="665" height="391" alt="image" src="https://github.com/user-attachments/assets/cf4b7a55-9862-477c-8416-0bc8a4e2f668" />
 
 Default rates increased sharply among customers reaching higher delinquency severity tiers, suggesting that prolonged repayment failure is one of the strongest predictors of eventual default.
 
@@ -45,7 +52,7 @@ Defaulting customers generally exhibited:
 * Lower payment coverage ratios
 
 * Greater reliance on available credit
-
+<img width="758" height="118" alt="image" src="https://github.com/user-attachments/assets/969e0a6d-826d-41ef-9fa5-cc1fd34620ea" />
 However, absolute balance size alone was not as predictive as repayment behavior metrics. Customers with moderate balances but deteriorating payment patterns were often riskier than customers with higher balances who consistently paid on time.
 
 This suggests that how customers manage their credit is more informative than how much credit they hold.
@@ -65,6 +72,7 @@ Customers were segmented using industry-aligned utilization thresholds:
 * High Risk (61–90%)
 
 * Maxed Out (91%+)
+<img width="695" height="239" alt="image" src="https://github.com/user-attachments/assets/fd046983-6d7e-49cd-9945-2c6d4376c3dc" />
 
 Default rates increased as utilization rose, particularly above the 60% threshold. Customers in high utilization tiers exhibited meaningfully elevated default rates relative to lower-utilization segments.
 
@@ -86,6 +94,8 @@ Across all segmentation analyses, the strongest associations with default were:
 
 * Low payment coverage ratios
 
+<img width="823" height="116" alt="image" src="https://github.com/user-attachments/assets/761c60e7-64d2-4f0e-a375-a64580fbacf8" />
+
 Behavioral variables consistently showed larger differences in default rates than static balance measures.
 
 This suggests that repayment deterioration is the dominant driver of default in this portfolio.
@@ -103,6 +113,7 @@ Default rarely occurred without prior behavioral signals.
 * Increasing frequency of late payments
 
 * Declining payment coverage ratio
+<img width="894" height="118" alt="image" src="https://github.com/user-attachments/assets/e600d599-99af-4dde-ac2a-db5ea357c4ba" />
 
 Customers often transitioned from mild delinquency to repeated lateness before reaching severe default states. Monitoring early-stage deterioration may allow for proactive intervention before accounts become deeply distressed.
 
