@@ -181,14 +181,6 @@ Defaulting customers generally exhibited:
 
 <img width="770" height="722" alt="image" src="https://github.com/user-attachments/assets/e054fc45-5702-4cf5-9b1f-e984a21f91f7" />
 
-Defaulted accounts tend to show:
-
-* Higher credit utilization
-
-* Lower payment coverage ratios
-
-* Larger outstanding balances relative to payments
-
 However, absolute balance size alone was not as predictive as repayment behavior metrics. Customers with moderate balances but deteriorating payment patterns were often riskier than customers with higher balances who consistently paid on time. Defaulting customers appear to experience liquidity strain, reflected in high balances and insufficient payments. This suggests that how customers manage their credit is more informative than how much credit they hold and that payment to balance ratios may serve as early stress indicators, especially when paired with rising utilization.
 ****
 > 4. Which Segments Show the Highest Default Rates?
@@ -237,16 +229,6 @@ Across all segmentation analyses, the strongest associations with default were:
 * Low payment coverage ratios
 
 <img width="823" height="116" alt="image" src="https://github.com/user-attachments/assets/761c60e7-64d2-4f0e-a375-a64580fbacf8" />
-
-Across all analyses, the most strongly associated factors include:
-
-* High delinquency severity (worst_pay_status)
-
-* Multiple late payment months
-
-* High credit utilization
-
-* Low payment coverage ratio
 
 When combined, these features demonstrate a compounding effect on risk. Behavioral variables consistently showed larger differences in default rates than static balance measures.
 Default risk appears behavioral and cumulative, not driven by a single factor. A composite scoring framework better captures default risk than any single metric in isolation.
