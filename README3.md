@@ -211,9 +211,7 @@ The top 20% highest-risk accounts would likely include:
 
 * Customers with low payment coverage ratios
 
-<img width="1749" height="369" alt="image" src="https://github.com/user-attachments/assets/2a23a061-714b-44ed-bf6e-77f0ca3b91ab" />
-
-<img width="852" height="593" alt="image" src="https://github.com/user-attachments/assets/cea488e3-7333-4b05-b347-c711e27b31fc" />
+<img width="784" height="644" alt="image" src="https://github.com/user-attachments/assets/d31b6c2d-6ff3-4def-9218-c961fb681f95" />
 
 Prioritizing these segments would concentrate review resources on accounts exhibiting the strongest observed risk signals, maximizing potential default mitigation impact.
 ****
