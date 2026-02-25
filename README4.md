@@ -1,8 +1,10 @@
 # Credit Risk Analysis (SQL + PostgreSQL)
 
+### Executive Summary
+
 This analysis aims to explore patterns related to credit risk in consumer credit card data. Understanding which factors are associated with default can help lenders make better decisions about underwriting, pricing, and monitoring portfolios. The insights generated serve as a foundation for risk reporting and potential predictive modeling.
 
-### Executive Summary
+****
 
 ### Project Overview
 
@@ -27,29 +29,34 @@ The goal of this project is to demonstrate practical data analyst skills, includ
    * 6.Are there early warning signs before someone defaults?
    * 7.If we had to review only 20% of accounts, who should we focus on?
 
+****
+
 ### Dataset
 Default of Credit Card Clients Dataset (Taiwan)
 #### Source: UCI Machine Learning Repository https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients
 ##### I. Yeh. "Default of Credit Card Clients," UCI Machine Learning Repository, 2009. [Online]. Available: https://doi.org/10.24432/C55S3H.
 
+****
+
 #### Dataset contents include:
 
-Credit limit (`limit_bal`)
+* Credit limit (`limit_bal`)
 
-Demographics (`SEX`, `EDUCATION`, `MARRIAGE`, `AGE`)
+* Demographics (`SEX`, `EDUCATION`, `MARRIAGE`, `AGE`)
 
-Repayment status history (`pay_0,`- `pay_6`)
+* Repayment status history (`pay_0,`- `pay_6`)
+ 
+* Monthly statement balances (`bill_amt1_usd`-`bill_amt6_usd`)
 
-Monthly statement balances (`bill_amt1_usd`-`bill_amt6_usd`)
+* Monthly payments (`pay_amt1_usd`)
 
-Monthly payments (`pay_amt1_usd`)
-
-Default indicator (`default_payment_next_month`)
+* Default indicator (`default_payment_next_month`)
 
 Target variable:
 
 `default_flag` (1 = defaulted, 0 = did not default)
 
+****
 > Key Variables Used in Analysis
 
 | Variable                 | Description                                    |
@@ -60,8 +67,12 @@ Target variable:
 | `utilization_rate`       | Credit balance divided by credit limit         |
 | `payment_coverage_ratio` | Payment amount divided by outstanding balance  |
 | `any_delinquency_flag`   | Indicator if any late payment occurred         |
-
-
+****
+## Limitations
+- Only 6 months of data; full payment history unknown
+- Severity may reflect prior behavior predating dataset window
+- No model building was performed
+  
 ### Tools Used
 
 * PostgreSQL (SQL)
