@@ -1,3 +1,60 @@
+# Credit Risk Analysis (SQL + PostgreSQL)
+### Executive Summary
+
+### Project Overview
+
+This project analyzes a credit card default dataset to explore patterns that may help predict default risk. Using PostgreSQL, I cleaned and transformed the data, converted financial values from Taiwan Dollars (TWD) to U.S. Dollars (USD), engineered risk-focused features, and generated summary outputs that can be used for reporting and dashboarding.
+
+The goal of this project is to demonstrate practical data analyst skills, including:
+
+   * Data cleaning and validation in SQL
+   * Feature engineering for real-world business questions
+   * Credit risk metric design and interpretation
+   * Preparing analysis-ready tables for visualization
+
+### Business Questions
+
+#### This project focuses on questions commonly asked in credit risk and lending analytics:
+
+   * 1.Which customers exhibit higher default risk based on delinquency behavior?
+   * 2.How does repayment history relate to default outcomes?
+   * 3.How do balances and payments differ between default vs. non-default accounts?
+   * 4.Which segments show the highest default rates?
+   * 5.What factors seem most related to customers defaulting?
+   * 6.Are there early warning signs before someone defaults?
+   * 7.If we had to review only 20% of accounts, who should we focus on?
+
+### Dataset
+Default of Credit Card Clients Dataset (Taiwan)
+
+Source: UCI Machine Learning Repository 
+##### I. Yeh. "Default of Credit Card Clients," UCI Machine Learning Repository, 2009. [Online]. Available: https://doi.org/10.24432/C55S3H.
+
+#### Dataset contents include:
+
+Credit limit (`limit_bal`)
+
+Demographics (`SEX`, `EDUCATION`, `MARRIAGE`, `AGE`)
+
+Repayment status history (`pay_0,`- `pay_6`)
+
+Monthly statement balances (`bill_amt1_usd`-`bill_amt6_usd)
+
+Monthly payments (`pay_amt1_usd)
+
+Default indicator (`default_payment_next_month`)
+
+Target variable:
+
+`default_flag` (1 = defaulted, 0 = did not default)
+
+### Tools Used
+
+* PostgreSQL (SQL)
+* pgAdmin 4 (database administration + CSV import)
+* Power BI
+* Tableau
+
 # Analysis
 
 The objective of this analysis is to identify behavioral and financial patterns associated with increased credit default risk. Using engineered features derived from six months of billing and repayment history (April–September 2005), customers were segmented across delinquency behavior, credit utilization, and payment coverage metrics. Default rates were then compared across these segments to determine which customer characteristics are most strongly associated with elevated risk.
@@ -156,6 +213,7 @@ The top 20% highest-risk accounts would likely include:
 
 <img width="1749" height="369" alt="image" src="https://github.com/user-attachments/assets/2a23a061-714b-44ed-bf6e-77f0ca3b91ab" />
 
+<img width="852" height="593" alt="image" src="https://github.com/user-attachments/assets/cea488e3-7333-4b05-b347-c711e27b31fc" />
 
 Prioritizing these segments would concentrate review resources on accounts exhibiting the strongest observed risk signals, maximizing potential default mitigation impact.
 ****
