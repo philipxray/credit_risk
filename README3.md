@@ -1,4 +1,7 @@
 # Credit Risk Analysis (SQL + PostgreSQL)
+
+This analysis aims to explore patterns related to credit risk in consumer credit card data. Understanding which factors are associated with default can help lenders make better decisions about underwriting, pricing, and monitoring portfolios. The insights generated serve as a foundation for risk reporting and potential predictive modeling.
+
 ### Executive Summary
 
 ### Project Overview
@@ -52,7 +55,7 @@ Target variable:
 
 * PostgreSQL (SQL)
 * pgAdmin 4 (database administration + CSV import)
-* Power BI
+* Power BI + DAX
 * Tableau
 
 # Analysis
@@ -65,13 +68,14 @@ Importantly, while the dataset contains six months of billing records, delinquen
 ****
 Customers were first segmented based on whether they experienced any delinquency during the observation window.
 
+Accounts with any history of delinquency exhibit a significantly higher default rate compared to accounts with no delinquency.
+
 <img width="691" height="118" alt="image" src="https://github.com/user-attachments/assets/f63bf330-e87b-43e5-9f06-67295a14124e" />
 
 <img width="601" height="562" alt="default_rate_by_delinquency_flag" src="https://github.com/user-attachments/assets/ccafe75e-44af-4667-932d-98974b8b9ef9" />
 
 
-Customers with no late payments demonstrated substantially lower default rates compared to customers with at least one late month. The presence of even a single delinquency corresponded with a sharp increase in default probability, indicating that repayment behavior deterioration is an early and meaningful risk signal.
-
+Customers with no late payments demonstrated substantially lower default rates compared to customers with at least one late month. The presence of even a single delinquency corresponded with a sharp increase in default probability, indicating that repayment behavior deterioration is an early and meaningful risk signal. Any delinquency is a strong early warning signal and should trigger enhanced monitoring or credit limit review.
 This suggests that behavioral repayment history is more predictive of default than static balance levels alone.
 ****
 > 2. How Does Repayment History Relate to Default Outcomes?
@@ -83,7 +87,8 @@ Repayment behavior was analyzed using two measures:
 * Delinquency severity (`worst_pay_status`)
 
 * Frequency of Late Payments
-  
+
+ 
 <img width="674" height="278" alt="late_months_count_table" src="https://github.com/user-attachments/assets/4b546c71-5291-4c8d-95aa-1d32e71e0e78" />
 
 Customers were grouped by the number of months they were late during the six-month window. Default rates increased progressively as the number of late months increased. Customers with multiple late months exhibited materially higher default rates compared to those with only one or no late payments.
