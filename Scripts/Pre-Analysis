@@ -1,1 +1,67 @@
+-- Create credit_raw table
+
+CREATE TABLE credit_raw (
+    id INTEGER,
+    limit_bal INTEGER,
+    sex INTEGER,
+    education INTEGER,
+    marriage INTEGER,
+    age INTEGER,
+
+    pay_0 INTEGER,
+    pay_2 INTEGER,
+    pay_3 INTEGER,
+    pay_4 INTEGER,
+    pay_5 INTEGER,
+    pay_6 INTEGER,
+
+    bill_amt1 INTEGER,
+    bill_amt2 INTEGER,
+    bill_amt3 INTEGER,
+    bill_amt4 INTEGER,
+    bill_amt5 INTEGER,
+    bill_amt6 INTEGER,
+
+    pay_amt1 INTEGER,
+    pay_amt2 INTEGER,
+    pay_amt3 INTEGER,
+    pay_amt4 INTEGER,
+    pay_amt5 INTEGER,
+    pay_amt6 INTEGER,
+
+    default_payment_next_month INTEGER
+);
+
+-- Create credit_staging
+
+CREATE TABLE credit_staging AS
+SELECT
+    id::INTEGER AS id,
+    limit_bal::INTEGER AS limit_bal,
+    sex::INTEGER AS sex,
+    education::INTEGER AS education,
+    marriage::INTEGER AS marriage,
+    age::INTEGER AS age,
+    pay_0::INTEGER AS pay_0,
+    pay_2::INTEGER AS pay_2,
+    pay_3::INTEGER AS pay_3,
+    pay_4::INTEGER AS pay_4,
+    pay_5::INTEGER AS pay_5,
+    pay_6::INTEGER AS pay_6,
+    bill_amt1::INTEGER AS bill_amt1,
+    bill_amt2::INTEGER AS bill_amt2,
+    bill_amt3::INTEGER AS bill_amt3,
+    bill_amt4::INTEGER AS bill_amt4,
+    bill_amt5::INTEGER AS bill_amt5,
+    bill_amt6::INTEGER AS bill_amt6,
+    pay_amt1::INTEGER AS pay_amt1,
+    pay_amt2::INTEGER AS pay_amt2,
+    pay_amt3::INTEGER AS pay_amt3,
+    pay_amt4::INTEGER AS pay_amt4,
+    pay_amt5::INTEGER AS pay_amt5,
+    pay_amt6::INTEGER AS pay_amt6,
+    default_payment_next_month::INTEGER AS default_flag
+FROM credit_raw
+
+-- Create credit_usd
 
