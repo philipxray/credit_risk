@@ -1,0 +1,103 @@
+-- Q1.  Which Customers Exhibit Higher Default Risk?
+
+SELECT
+    any_delinquency_flag,
+    COUNT(*) AS total_customers,
+    SUM(default_flag) AS total_defaults,
+    ROUND(AVG(default_flag) * 100, 2) AS default_rate_percent
+FROM credit_features
+GROUP BY any_delinquency_flag
+ORDER BY any_delinquency_flag DESC;
+
+-- Q2. How Does Repayment History Relate to Default Outcomes?
+
+-- Part A - late_months_count
+
+SELECT
+    late_months_count,
+    COUNT(*) AS total_customers,
+    SUM(default_flag) AS total_defaults,
+    ROUND(AVG(default_flag) * 100, 2) AS default_rate_percent
+FROM credit_features
+GROUP BY late_months_count
+ORDER BY late_months_count;
+
+-- Part B - worst_pay_status
+
+SELECT
+    worst_pay_status,
+    COUNT(*) AS total_customers,
+    SUM(default_flag) AS total_defaults,
+    ROUND(AVG(default_flag) * 100, 2) AS default_rate_percent
+FROM credit_features
+GROUP BY worst_pay_status
+ORDER BY worst_pay_status;
+
+-- Q3. How Do Balances and Payments Differ Between Default and Non-Default Accounts?
+
+SELECT
+    default_flag,
+    ROUND(AVG(utilization_rate), 3) AS avg_utilization,
+    ROUND(AVG(payment_coverage_ratio), 3) AS avg_payment_coverage,
+    ROUND(AVG(avg_monthly_balance_usd), 2) AS avg_balance,
+    ROUND(AVG(avg_pay_amt_usd), 2) AS avg_payment
+FROM credit_features
+GROUP BY default_flag;
+
+
+
+-- Q4. Which Segments Show the Highest Default Rates?
+
+SELECT
+    CASE
+        WHEN utilization_rate = 0 THEN 'Non-Users (0%)'
+        WHEN utilization_rate <= 0.10 THEN 'Optimal (1–10%)'
+        WHEN utilization_rate <= 0.30 THEN 'Healthy (11–30%)'
+        WHEN utilization_rate <= 0.60 THEN 'Moderate Risk (31–60%)'
+        WHEN utilization_rate <= 0.90 THEN 'High Risk (61–90%)'
+        ELSE 'Maxed Out (91%+)'
+    END AS utilization_segment,
+    COUNT(*) AS total_customers,
+    SUM(default_flag) AS total_defaults,
+    ROUND(AVG(default_flag) * 100, 2) AS default_rate_percent
+FROM credit_features
+GROUP BY utilization_segment
+ORDER BY default_rate_percent DESC;
+
+
+-- Q5. What Factors Appear Most Related to Default?
+
+SELECT
+    default_flag,
+    ROUND(AVG(late_months_count), 2) AS avg_late_months,
+    ROUND(AVG(worst_pay_status), 2) AS avg_worst_severity,
+    ROUND(AVG(utilization_rate), 3) AS avg_utilization,
+    ROUND(AVG(payment_coverage_ratio), 3) AS avg_payment_coverage
+FROM credit_features
+GROUP BY default_flag;
+
+-- Q6. Are There Early Warning Signs Before Default?
+
+SELECT
+    any_delinquency_flag,
+    ROUND(AVG(utilization_rate), 3) AS avg_utilization,
+    ROUND(AVG(payment_coverage_ratio), 3) AS avg_payment_coverage,
+    ROUND(AVG(late_months_count), 2) AS avg_late_months,
+    ROUND(AVG(default_flag) * 100, 2) AS default_rate_percent
+FROM credit_features
+GROUP BY any_delinquency_flag
+ORDER BY any_delinquency_flag;
+
+-- Q7. If Only 20% of Accounts Could Be Reviewed, Where Should Focus Be Placed?
+
+SELECT *
+FROM credit_features
+ORDER BY
+    late_months_count DESC,
+    worst_pay_status DESC,
+    utilization_rate DESC,
+    payment_coverage_ratio ASC
+LIMIT (
+    SELECT COUNT(*) * 0.20
+    FROM credit_features
+);
