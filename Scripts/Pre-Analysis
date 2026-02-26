@@ -65,3 +65,95 @@ FROM credit_raw
 
 -- Create credit_usd
 
+CREATE TABLE credit_usd AS
+SELECT
+    id,
+    (limit_bal * 0.032)::numeric(12,3) AS limit_bal_usd,
+    sex,
+    education,
+    marriage,
+    age,
+    pay_0, pay_2, pay_3, pay_4, pay_5, pay_6,
+
+    (bill_amt1 * 0.032)::numeric(14,3) AS bill_amt1_usd,
+    (bill_amt2 * 0.032)::numeric(14,3) AS bill_amt2_usd,
+    (bill_amt3 * 0.032)::numeric(14,3) AS bill_amt3_usd,
+    (bill_amt4 * 0.032)::numeric(14,3) AS bill_amt4_usd,
+    (bill_amt5 * 0.032)::numeric(14,3) AS bill_amt5_usd,
+    (bill_amt6 * 0.032)::numeric(14,3) AS bill_amt6_usd,
+
+    (pay_amt1 * 0.032)::numeric(14,3) AS pay_amt1_usd,
+    (pay_amt2 * 0.032)::numeric(14,3) AS pay_amt2_usd,
+    (pay_amt3 * 0.032)::numeric(14,3) AS pay_amt3_usd,
+    (pay_amt4 * 0.032)::numeric(14,3) AS pay_amt4_usd,
+    (pay_amt5 * 0.032)::numeric(14,3) AS pay_amt5_usd,
+    (pay_amt6 * 0.032)::numeric(14,3) AS pay_amt6_usd,
+
+    default_payment_next_month AS default_flag
+FROM credit_raw;
+
+
+-- RAW
+-- check/confirm column data type
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'credit_raw'
+
+SELECT COUNT(*) FROM credit_raw;  --  make sure data imported
+SELECT COUNT(limit_bal) FROM credit_raw;
+SELECT limit_bal FROM credit_raw LIMIT 10;
+
+-- check/confirm column data type
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'credit_raw'
+  AND column_name = 'limit_bal';
+
+-- STAGING
+SELECT COUNT(limit_bal) FROM credit_staging;
+SELECT COUNT(*) FROM credit_staging;
+
+SELECT COUNT(*) FROM credit_staging;
+
+
+-- check/confirm column data type
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'credit_staging'
+  AND column_name = 'limit_bal';
+
+
+-- worst_pay_status_buckets
+
+SELECT
+  pay_status_bucket,
+  customers,
+  default_count,
+  default_rate_pct
+FROM (
+  SELECT
+    CASE
+      WHEN worst_pay_status <= 0 THEN 'No delinquency (<=0)'
+      WHEN worst_pay_status BETWEEN 1 AND 2 THEN '1–2 months past due'
+      WHEN worst_pay_status BETWEEN 3 AND 4 THEN '3–4 months past due'
+      WHEN worst_pay_status BETWEEN 5 AND 6 THEN '5–6 months past due'
+      ELSE '7–8 months past due'
+    END AS pay_status_bucket,
+
+    COUNT(*) AS customers,
+    SUM(default_flag) AS default_count,
+    ROUND(100.0 * AVG(default_flag::numeric), 2) AS default_rate_pct,
+
+    CASE
+      WHEN worst_pay_status <= 0 THEN 1
+      WHEN worst_pay_status BETWEEN 1 AND 2 THEN 2
+      WHEN worst_pay_status BETWEEN 3 AND 4 THEN 3
+      WHEN worst_pay_status BETWEEN 5 AND 6 THEN 4
+      ELSE 5
+    END AS bucket_order
+
+  FROM credit_features
+  GROUP BY 1, 5
+) x
+ORDER BY bucket_order;
+
