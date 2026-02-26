@@ -258,8 +258,8 @@ Accounts were ranked and segmented into:
 
 The Top 20% segment exhibits a significantly higher default rate compared to the rest of the portfolio. The composite score effectively concentrates default risk into a manageable review segment. Prioritizing these segments would concentrate review resources on accounts exhibiting the strongest observed risk signals, maximizing potential default mitigation impact. If operational resources are limited, focusing on the top 20% highest risk accounts would maximize risk mitigation impact.
 ****
-Practical Recommendation
-****
+> Practical Recommendation
+
 This segmentation approach can support resource prioritization for risk teams by focusing efforts where default probability is highest.
 ****
 Final Summary
